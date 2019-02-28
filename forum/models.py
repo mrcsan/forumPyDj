@@ -6,9 +6,8 @@ class Thread(models.Model):
     thread_text = models.CharField(max_length=500)
     pub_date = models.DateTimeField('date published')
 
-
-class Post(models.Model):
-    thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
+class Answear(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
     post_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
