@@ -7,3 +7,9 @@ def index(request):
 
 def detail(request, thread_id):
     return HttpResponse("You're looking at thread %s." % thread_id)
+
+def registration(request):
+    return HttpResponse("You're looking at registration site.")
+
+def login (request):
+    return HttpResponse("You're looking at login site.")

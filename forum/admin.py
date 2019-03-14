@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Thread
-from .models import Answear
+from .models import Post
 
 admin.site.register(Thread)
-admin.site.register(Answear)
+admin.site.register(Post)
