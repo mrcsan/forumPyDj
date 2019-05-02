@@ -17,29 +17,31 @@
         </style>
 
         <link rel="stylesheet" href="{% static 'forum/layout.css' %}">
+        <script src="{ % static 'forum/interactions.js' % }"></script>
+
     </head>
     <body>
-        <div class="jumbotron text-center" style="margin-bottom:0">
+        <div class="jumbotron text-center" style="margin-bottom:0" id="header">
             <h1>PyDj Forum</h1>
-            <p>Resize this responsive page to see the effect!</p> 
+            <!-- <p>Resize this responsive page to see the effect!</p> -->
         </div>
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a class="navbar-brand" href="#">Menu</a>
+            <a class="navbar-brand" href="http://127.0.0.1:8000/forum">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Log In</a>
+                        <a class="nav-link" href="http://127.0.0.1:8000/forum/login">Log In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sign Up</a>
+                        <a class="nav-link" href="http://127.0.0.1:8000/forum/signup">Sign Up</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">FAQ</a>
-                    </li>    
+                    </li> -->    
                 </ul>
              </div>  
          </nav>
@@ -49,8 +51,8 @@
             {% endblock %}
         </div>
 
-        <div class="jumbotron text-center" style="margin-bottom:0">
+        <!-- <div class="jumbotron text-center" style="margin-bottom:0">
             <p>Footer</p>
-        </div>
+        </div> -->
     </body>
 </html>

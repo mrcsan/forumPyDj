@@ -26,3 +26,16 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'forum/signup.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        form = LogInForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = LogInForm()
+    return render(request, 'forum/login.html', {'form': form})
