@@ -1,5 +1,10 @@
 {% extends 'forum/base.html' %}
-    {% block content %}
-        <h1>Blank page for unregistered users!</h>
-        <p>Content will be visible after you log in or create an account. :)</p>
-    {% endblock %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+{% else %}
+  <p>You are not logged in</p>
+{% endif %}
+{% endblock %}

@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<int:thread_id>/', views.detail, name='thread'),
     path('signup', views.signup, name='signup'),
+    path('signin', views.signin, name='signin'),
 ]
