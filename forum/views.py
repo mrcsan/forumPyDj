@@ -14,7 +14,7 @@ def index(request):
 def detail(request, thread_id):
     return HttpResponse("You're looking at thread %s." % thread_id)
 
-def signup(request):
+def registration(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -24,12 +24,15 @@ def signup(request):
             print("email: "+str(form.cleaned_data.get('email')))
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('index')
+            return redirect('logedin')
     else:
         form = SignUpForm()
-    return render(request, 'forum/signup.html', {'form': form})
+    return render(request, 'forum/registration.html', {'form': form})
 
-def signin(request):
+def logedin(request):
+    return render(request, 'forum/logedin.html', {})
+
+def login(request):
     if request.method == 'POST':
         form = LogInForm(request.POST)
         if form.is_valid():
@@ -37,7 +40,10 @@ def signin(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('index')
+            return redirect('logedin')
     else:
         form = LogInForm()
-    return render(request, 'forum/index.html', {'form': form})
+    return render(request, 'forum/login.html', {'form': form})
+
+def logout(request):
+    return render(request, 'forum/logout.html', {})
