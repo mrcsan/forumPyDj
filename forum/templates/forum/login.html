@@ -5,12 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<h2>{{ header }}</h2>
-<p>{{ paragraph }}</p>
-<p></p>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button class="btn btn-success type="submit">Login</button>
-</form>
+<div class="container">
+  <h2>{{ header }}</h2>
+  <p>{{ paragraph }}</p>
+  <p></p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success" type="submit">Login</button>
+  </form>
+</div>
 {% endblock %}
