@@ -4,7 +4,6 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from forum.forms import SignUpForm
-from forum.forms import LogInForm
 
 
 def index(request):
@@ -20,17 +19,6 @@ def detail(request, thread_id):
     return HttpResponse("You're looking at thread %s." % thread_id)
 
 def registrationView(request):
-    #if request.user.is_authenticated():
-        #current_username = request.user.username
-        #text_header = "Nothing to do here "
-        #text_paragraph = "You are alredy regidtrated user. xD"
-
-        #args = {'header': text_header, 
-                #'paragraph': text_paragraph,
-                #'username': current_username,}
-
-        #return render(request, 'forum/logedin.html', args)
-    #else:
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -53,24 +41,20 @@ def logedinView(request):
     args = {'header': text_header, 
             'paragraph': text_paragraph,
             'username': current_username,}
-
     return render(request, 'forum/logedin.html', args)
 
 def loginView(request):
     text_header = "Login"
     text_paragraph = "You can login here!"
-
     if request.method == 'POST':
-        form = LogInForm(request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = form.get_user()
             login(request, user)
-            return redirect('/formu/logedin.html')
+            return redirect('logedin')
     else:
-        form = LogInForm()
-    return render(request, 'forum/login.html', {'form': form, 'header': text_header, 'paragraph': text_paragraph,})
+        form = AuthenticationForm()
+    return render(request, 'forum/login.html', {'form': form, 'header': text_header, 'paragraph': text_paragraph})
 
 def logoutView(request):
     logout(request)
