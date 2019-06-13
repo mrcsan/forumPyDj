@@ -3,13 +3,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Post
-from .models import Thread
+from .models import Topic
 
 class PostForm(forms.ModelForm):
 
     class Meta:
-        model = Thread
-        fields = ('thread_title', 'thread_text',)
+        model = Topic
+        fields = ('topic_title', 'topic_text',)
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
