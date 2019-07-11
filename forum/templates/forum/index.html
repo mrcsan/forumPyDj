@@ -1,16 +1,37 @@
 {% extends 'forum/base.html' %}
 
-{% block head %}
-<title>PyDj Home</title>
-{% endblock %}
+  {% block head %}
+  <title>PyDj Home</title>
+  {% endblock %}
 
-{% block content %}
-<!-- {% if user.is_authenticated %}
-  Hi {{ user.username }}!
+  {% block content %}
+
+  {% if user.is_authenticated %}
+
+    <h2>{{ header }}</h2>
+    <p>{{ paragraph }}</p>
+
+    {% if latest_topic_list %}
+      <ul>
+      {% for topic in latest_topic_list %}
+          <li><a href="/forum/{{ topic.id }}/">{{ topic.topic_title }}</a></li>
+      {% endfor %}
+      </ul>
+  {% else %}
+      <p>No topic are available.</p>
+  {% endif %}
+
+  {% if latest_post_list %}
+      <ul>
+      {% for topic in latest_post_list %}
+          <li><a href="/forum/{{ post.id }}/">{{ post.post_title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+      <p>No post are available.</p>
+  {% endif %}
+
 {% else %}
-  <p>You are not logged in</p>
-{% endif %} -->
-<h2>{{ header }}</h2>
-<p>{{ paragraph }}</p>
-
+    <p>You are not logged in</p>
+{% endif %}
 {% endblock %}
