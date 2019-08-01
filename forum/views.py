@@ -15,8 +15,18 @@ def index(request):
 
     return render(request, 'forum/index.html', args)
 
-def detail(request, thread_id):
+def threadView(request, thread_id):
+
+    text_header = "Ups!"
+    text_paragraph = "It seems that you are not logged in. If you want to see this page please authenticate. ;)"
+
     return HttpResponse("You're looking at thread %s." % thread_id)
+
+def allThreadsView(request, thread_id):
+    return HttpResponse("You're looking at thread %s." % thread_id)
+
+#def allPostsView(request, thread_id):
+    #return HttpResponse("You're looking at thread %s." % thread_id)
 
 def registrationView(request):
     if request.method == 'POST':
