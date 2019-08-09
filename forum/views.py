@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -28,20 +27,19 @@ def index(request):
 
 def topicView(request, topic_id):
     if request.user.is_authenticated:
-        topic_title = topic_id
-        topic_text = "dupa"
-        post_list = Post.objects.order_by('-published_date')[:5]
+        topic = get_object_or_404(Topic, pk=topic_id)
 
-        args = {'header': topic_title, 'paragraph': topic_text, 'latest_post_list': post_list}
+        args = {'topic': topic}
 
-    else:   
+    else:
+
         text_header = "Ups!"
         text_paragraph = "It seems that you are not logged in. If you want to see this page please authenticate. ;)"
 
         args = {'header': text_header, 
         'paragraph': text_paragraph}
 
-    return render(request, 'forum/<int:topic_id>/', args)
+    return render(request, 'forum/', args)
 
 def allTopicsView(request, thread_id):
     return 
@@ -92,14 +90,3 @@ def faqView(request):
             'paragraph': text_paragraph}
 
     return render(request, 'forum/faq.html', args)
-
-def dashboardView(request):
-    text_header = "Dashboard"
-    text_paragraph = "This is content" 
-    topic_list = Topic.objects.order_by('-published_date')[:5]
-    post_list = Post.objects.order_by('-published_date')[:5]
-    #output = ', '.join([t.thread_title for t in latest_threads_list])
-
-    args = {'header': text_header, 'paragraph': text_paragraph, 'latest_topic_list': topic_list, 'latest_post_list': post_list}
-
-    return  render(request, 'forum/dashboard.html', args)
