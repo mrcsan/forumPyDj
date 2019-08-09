@@ -26,12 +26,13 @@ def index(request):
 
     return render(request, 'forum/index.html', args)
 
-def threadView(request, thread_id):
+def topicView(request, topic_id):
     if request.user.is_authenticated:
-        thread_title = thread_id
+        topic_title = topic_id
+        topic_text = "dupa"
         post_list = Post.objects.order_by('-published_date')[:5]
 
-        args = {'header': thread_title, 'paragraph': text_paragraph, 'latest_post_list': post_list}
+        args = {'header': topic_title, 'paragraph': topic_text, 'latest_post_list': post_list}
 
     else:   
         text_header = "Ups!"
@@ -40,13 +41,10 @@ def threadView(request, thread_id):
         args = {'header': text_header, 
         'paragraph': text_paragraph}
 
-    return render(request, 'forum/thread.html', args)
+    return render(request, 'forum/<int:topic_id>/', args)
 
-def allThreadsView(request, thread_id):
+def allTopicsView(request, thread_id):
     return 
-
-#def allPostsView(request, thread_id):
-    #return HttpResponse("You're looking at thread %s." % thread_id)
 
 def registrationView(request):
     if request.method == 'POST':
@@ -63,16 +61,6 @@ def registrationView(request):
         form = SignUpForm()
     return render(request, 'forum/registration.html', {'form': form})
 
-def logedinView(request):
-    current_username = request.user.username
-    text_header = "You have logged in as "
-    text_paragraph = "Content on this site will be available in the future. xD"
-
-    args = {'header': text_header, 
-            'paragraph': text_paragraph,
-            'username': current_username,}
-    return render(request, 'forum/logedin.html', args)
-
 def loginView(request):
     text_header = "Login"
     text_paragraph = "You can login here!"
@@ -81,7 +69,7 @@ def loginView(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('logedin')
+            return redirect('index')
     else:
         form = AuthenticationForm()
     return render(request, 'forum/login.html', {'form': form, 'header': text_header, 'paragraph': text_paragraph})
@@ -94,7 +82,7 @@ def logoutView(request):
     args = {'header': text_header, 
             'paragraph': text_paragraph}
 
-    return render(request, 'forum/logout.html', args)
+    return render(request, 'forum/index.html', args)
 
 def faqView(request):
     text_header = "FAQ - Frequently asked questions"
