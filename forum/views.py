@@ -9,7 +9,7 @@ from django.http import HttpResponse
 def index(request):
     if request.user.is_authenticated:
         logged_user_name = request.user.username
-        text_header = "Welcome in your dashboard " + logged_user_name + "!"
+        text_header = "Welcome in your dashboard " + logged_user_name + "."
         text_paragraph = "Here are the latest topics on forum:" 
         topic_list = Topic.objects.order_by('-published_date')[:5]
 
