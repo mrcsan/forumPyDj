@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+  <h2>{{ header }}</h2>
+  <p>{{ paragraph }}</p>
+{% else %}
   <h2>Register</h2>
   <form method="post">
     {% csrf_token %}
@@ -22,4 +26,5 @@
     {% endfor %}
     <button class="btn btn-success type="submit">Sign up</button>
   </form>
+{% endif %}
 {% endblock %}

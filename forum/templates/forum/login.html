@@ -5,14 +5,19 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+{% if user.is_authenticated %}
   <h2>{{ header }}</h2>
   <p>{{ paragraph }}</p>
-  <p></p>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-success" type="submit">Login</button>
-  </form>
-</div>
+{% else %}
+  <div class="container">
+    <h2>{{ header }}</h2>
+    <p>{{ paragraph }}</p>
+    <p></p>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-success" type="submit">Login</button>
+    </form>
+  </div>
+{% endif %}
 {% endblock %}
