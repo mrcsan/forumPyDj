@@ -10,6 +10,6 @@ function goToLogOut() {
     window.location='/forum/logout';
   };
 
-  // function goToNewTopic() {
-  //   alert = "Hold your horses cowboy! This feature is not ready yet. XD";
-  // };
+  function goToNewTopic() {
+    window.alert = "Hold your horses cowboy! This feature is not ready yet. XD";
+  };
