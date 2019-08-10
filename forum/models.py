@@ -14,7 +14,7 @@ class Topic(models.Model):
         self.save()
 
     def __str__(self):
-        return self.topic_title
+        return self.topic_title, self.published_date, self.topic_title, self.topic_text 
         
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,3 +26,6 @@ class Post(models.Model):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+
+    def __str__(self):
+        return self.topic, self.published_date

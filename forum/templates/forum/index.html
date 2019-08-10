@@ -14,7 +14,7 @@
     {% if latest_topic_list %}
       <ul>
       {% for topic in latest_topic_list %}
-          <li><a href="/forum/{{ topic.id }}/">{{ topic.topic_title }}</a></li>
+          <li><a href="{% url 'topic' topic.id %}"> {{ topic.topic_title }} </a></li>
       {% endfor %}
       </ul>
   {% else %}

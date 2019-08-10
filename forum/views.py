@@ -26,8 +26,11 @@ def index(request):
 def topicView(request, topic_id):
     if request.user.is_authenticated:
 
-        text_header = "You're looking at topic %s." % topic_id
-        text_paragraph = "You're looking at topic %s." % topic_id
+        # text_header = "You're looking at topic %s." % topic_id
+        # text_paragraph = "You're looking at topic %s." % topic_id
+
+        text_header = Topic.topic_title
+        text_paragraph = Topic.topic_text
 
         args = {'header': text_header, 'paragraph': text_paragraph}
 
