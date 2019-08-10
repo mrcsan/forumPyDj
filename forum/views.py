@@ -8,8 +8,9 @@ from django.http import HttpResponse
 
 def index(request):
     if request.user.is_authenticated:
-        text_header = "Dashboard"
-        text_paragraph = "Latest topics:" 
+        logged_user_name = request.user.username
+        text_header = "Welcome in your dashboard " + logged_user_name + "!"
+        text_paragraph = "Here are the latest topics on forum:" 
         topic_list = Topic.objects.order_by('-published_date')[:5]
 
         args = {'header': text_header, 'paragraph': text_paragraph, 'latest_topic_list': topic_list}
