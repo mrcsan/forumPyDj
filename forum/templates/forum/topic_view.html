@@ -7,22 +7,11 @@
 {% block content %}
     {% if user.is_authenticated %}
 
-    {{ topic }}
+        <h2>{{ header }}</h2>
+        <p>{{ paragraph }}</p>
 
-    <!-- <h2>{{ header }}</h2>
-    <p>{{ paragraph }}</p> -->
-
-    <!-- {% if all_posts_list %}
-        <ul>
-        {% for post in topic_posts_list %}
-            <li><a href="/forum/{{ topic.id }}/">{{ post.post_text }}</a></li>
-        {% endfor %}
-        </ul>
-        {% else %}
-        <p>No posts in this thread are available.</p> -->
+    {% else %}
+        <h2>{{ header }}</h2>
+        <p>{{ paragraph }}</p>
     {% endif %}
-{% else %}
-    <h2>{{ header }}</h2>
-    <p>{{ paragraph }}</p>
-{% endif %}
 {% endblock %}

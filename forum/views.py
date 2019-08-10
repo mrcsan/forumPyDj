@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from forum.forms import SignUpForm
 from .models import Topic, Post
+from django.http import HttpResponse
 
 def index(request):
     if request.user.is_authenticated:
@@ -11,10 +12,7 @@ def index(request):
         text_paragraph = "Latest topics:" 
         topic_list = Topic.objects.order_by('-published_date')[:5]
 
-
         args = {'header': text_header, 'paragraph': text_paragraph, 'latest_topic_list': topic_list}
-
-        #return render(request, 'forum/index.html', args)
          
     else:
         text_header = "Welcome in PyDJ Forum!"
@@ -27,19 +25,19 @@ def index(request):
 
 def topicView(request, topic_id):
     if request.user.is_authenticated:
-        topic = get_object_or_404(Topic, pk=topic_id)
 
-        args = {'topic': topic}
+        text_header = "You're looking at topic %s." % topic_id
+        text_paragraph = "You're looking at topic %s." % topic_id
+
+        args = {'header': text_header, 'paragraph': text_paragraph}
 
     else:
-
         text_header = "Ups!"
         text_paragraph = "It seems that you are not logged in. If you want to see this page please authenticate. ;)"
 
-        args = {'header': text_header, 
-        'paragraph': text_paragraph}
+        args = {'header': text_header, 'paragraph': text_paragraph}
 
-    return render(request, 'forum/', args)
+    return render(request, 'forum/topic_view.html', args)
 
 def allTopicsView(request, thread_id):
     return 
