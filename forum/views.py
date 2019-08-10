@@ -47,32 +47,48 @@ def allTopicsView(request, topic_id):
     return 
 
 def registrationView(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            print("email: "+str(form.cleaned_data.get('email')))
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('index')
+    if request.user.is_authenticated:
+        text_header = "Hey dude!"
+        text_paragraph = "You are already logedin. Why do you try such dirty tricks? XD"
+
+        args = {'header': text_header, 
+            'paragraph': text_paragraph}
     else:
-        form = SignUpForm()
-    return render(request, 'forum/registration.html', {'form': form})
+        if request.method == 'POST':
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password1')
+                print("email: "+str(form.cleaned_data.get('email')))
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                return redirect('index')
+        else:
+            form = SignUpForm()
+            args = {'form': form}
+    return render(request, 'forum/registration.html', args)
 
 def loginView(request):
-    text_header = "Login"
-    text_paragraph = "You can login here!"
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('index')
+    if request.user.is_authenticated:
+        text_header = "Hey dude!"
+        text_paragraph = "You are already logedin. Why do you try such dirty tricks? XD"
+
+        args = {'header': text_header, 
+            'paragraph': text_paragraph}
     else:
-        form = AuthenticationForm()
-    return render(request, 'forum/login.html', {'form': form, 'header': text_header, 'paragraph': text_paragraph})
+        text_header = "Login"
+        text_paragraph = "You can login here!"
+        if request.method == 'POST':
+            form = AuthenticationForm(data=request.POST)
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                return redirect('index')
+        else:
+            form = AuthenticationForm()
+            args = {'form': form, 'header': text_header, 'paragraph': text_paragraph}
+    return render(request, 'forum/login.html', args)
 
 def logoutView(request):
     logout(request)
