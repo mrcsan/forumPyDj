@@ -1,0 +1,17 @@
+{% extends 'forum/base.html' %}
+
+{% block head %}
+<title>PyDj Home</title>
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+
+        <h2>{{ header }}</h2>
+        <p>{{ paragraph }}</p>
+
+    {% else %}
+        <h2>{{ header }}</h2>
+        <p>{{ paragraph }}</p>
+    {% endif %}
+{% endblock %}

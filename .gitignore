@@ -103,3 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 VC_project.code-workspace
+forum/migrations/0001_initial.py
+forum/static/img/**
+
