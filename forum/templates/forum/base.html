@@ -18,37 +18,32 @@
             }
         </style>
 
-        <!-- <link rel="stylesheet" href="{% static 'forum/style.css' %}"> -->
-
         <script src="{% static 'forum\interactions.js' %}"></script>
        
     </head>
     <body>
         <div class="jumbotron text-center" style="margin-bottom:0" id="header">
             <h1><a href="http://127.0.0.1:8000/forum">PyDj Forum</a></h1>
-            <!-- <p>Resize this responsive page to see the effect!</p> -->
+            <p>Resize this responsive page to see the effect!</p>
         </div>
-
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <!-- <a class="navbar-brand" href="http://127.0.0.1:8000/forum">Home</a> -->
             <a class="navbar-brand" href="http://127.0.0.1:8000/forum">
                 <img src="https://bit.ly/2ElckHN" alt="Home" style="width:40px;">
               </a>
-            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button> -->
-            {% if user.is_authenticated %}
-                <button class="btn btn-outline-success my-2 mr-sm-2" type="submit" onclick="goToNewTopic()">New Topic</button>
-            {% endif %}
-            <!-- <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="http://127.0.0.1:8000/forum/faq">FAQ</a>
-                    </li>   
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <button class="btn btn-outline-success" type="submit" onclick="goToNewTopic()">New Topic</button>
+                    </li>
+                    {% endif %}
                 </ul>
-            </div>-->
             {% if user.is_authenticated %}
-                <button class="btn btn-outline-danger my-2 mr-sm-2 right" type="submit">{{request.user.username}}</button>
+                <!-- <button class="btn btn-outline-danger my-2 mr-sm-2" type="submit">{{request.user.username}}</button> -->
+                <a class="nav-link" href="http://127.0.0.1:8000/forum/">{{request.user.username}}</a>
                 <button class="btn btn-outline-warning my-2 mr-sm-2" type="submit" onclick="goToLogOut()">Log Out</button>
                 {% else %}
                 <button class="btn btn-outline-success my-2 mr-sm-2" type="submit" onclick="goToLogIn()">Log In</button>
