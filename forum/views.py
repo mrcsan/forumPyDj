@@ -43,7 +43,7 @@ def topicView(request, topic_id):
 
     return render(request, 'forum/topic_view.html', args)
 
-def allTopicsView(request, thread_id):
+def allTopicsView(request, topic_id):
     return 
 
 def registrationView(request):
